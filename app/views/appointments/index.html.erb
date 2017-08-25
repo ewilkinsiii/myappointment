@@ -1,0 +1,60 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Appointments</h1>
+
+ <%=month_calendar events: @appointments do |date, appointments| %>
+    <%= date.strftime("%d") %>
+    
+    <% appointments.each do |appointment| %>
+      <div>
+        <span class="badge badge-primary"><%= appointment.name%>  <%=appointment.start_time.strftime("%l:%M%p")%></span>
+      </div>
+    <% end %>
+  <% end %>
+
+  <tbody>
+    <% @appointments.each do |appointment| %>
+      <tr>
+        <td><%= appointment.name %></td>
+        <td><%= appointment.phone %></td>
+        <td><%= appointment.user_style %></td>
+        <td><%= appointment.start_time %></td>
+        <td><%= appointment.end_time %></td>
+        <td><%= link_to 'Show', appointment %></td>
+        <td><%= link_to 'Edit', edit_appointment_path(appointment) %></td>
+        <td><%= link_to 'Destroy', appointment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Appointment', new_appointment_path %>
+
+<link rel='stylesheet' type='text/css' href='../fullcalendar/fullcalendar.css' />
+<link rel='stylesheet' type='text/css' href='../fullcalendar/fullcalendar.print.css' media='print' />
+
+<style type='text/css'>
+	body {
+		margin-top: 40px;
+		text-align: center;
+		font-size: 14px;
+		font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
+		}
+		
+	#loading {
+		position: absolute;
+		top: 5px;
+		right: 5px;
+		}
+	#calendar {
+		width: 900px;
+		margin: 0 auto;
+		}
+</style>
+</head>
+<body>
+<div id='loading' style='display:none'>loading...</div>
+<div id='calendar'></div>
+</body>
